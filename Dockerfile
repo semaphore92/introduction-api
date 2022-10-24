@@ -1,5 +1,3 @@
 FROM openjdk:11-jdk
-
-COPY target/ app.jar
-
+COPY ./build/libs/introduction-api-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java" , "-jar", "app.jar"]
