@@ -1,7 +1,9 @@
 package com.main.introduction.config;
 
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -23,9 +25,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 인가 정책 설정
         http.csrf().disable()
                 .authorizeRequests()
-                .anyRequest()
+                .antMatchers("/api/**")
                 .authenticated()
-                .antMatchers("/api/")
+                .and()
+                .formLogin()
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll()
                 ;
+    }
+
+    public void configureGlobal(AuthenticationManagerBuilder auth, PasswordEncoder passwordEncoder) throws Exception {
+        auth.inMemoryAuthentication().withUser("user").password(passwordEncoder.encode("password")).roles("USER");
     }
 }
