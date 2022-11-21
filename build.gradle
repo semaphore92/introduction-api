@@ -14,6 +14,10 @@ configurations {
 	}
 }
 
+project.ext.testName
+project.ext.getTestName{
+	return project.testName
+}
 repositories {
 	mavenCentral()
 }
