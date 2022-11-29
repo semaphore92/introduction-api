@@ -14,10 +14,6 @@ configurations {
 	}
 }
 
-project.ext.testName
-project.ext.getTestName{
-	return project.testName
-}
 repositories {
 	mavenCentral()
 }
@@ -45,6 +41,8 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.12'
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 
 
 }

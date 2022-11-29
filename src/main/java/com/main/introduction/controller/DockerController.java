@@ -1,6 +1,8 @@
 package com.main.introduction.controller;
 
 import com.main.introduction.config.SecurityConfig;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,13 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api")
 public class DockerController {
 
+    @ApiModelProperty(example = "테스트")
+    private String test;
+
     @GetMapping("/docker")
-    @Operation(summary = "Returns List of Audit Log records based on the matching search critera", description = "Returns list of Audit Log records matching the search critera. SLA:500",
-            responses = {
-            @ApiResponse(responseCode = "200", description = "Successful retrieval of list of Audit Log records matching the search criteria", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = SecurityConfig.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid input provided", content = { @Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = { @Content(mediaType = "application/json")}),})
+    @ApiOperation(value="테스트", notes="테스트입니다")
     public String home(){
         return "docker Start";
     }
