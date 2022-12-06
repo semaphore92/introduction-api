@@ -12,15 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Schema(additionalProperties = Schema.AdditionalPropertiesValue.FALSE)
 @RequestMapping("api")
 public class DockerController {
 
-    @ApiModelProperty(example = "테스트")
-    private String test;
-
     @GetMapping("/docker")
-    @ApiOperation(value="테스트", notes="테스트입니다")
     public String home(){
         return "docker Start";
     }
