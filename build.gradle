@@ -39,6 +39,10 @@ dependencies {
 	//StringEscapeUtils
 	implementation 'org.apache.commons:commons-text:1.8'
 
+	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-rest-core
+	implementation group: 'org.springframework.data', name: 'spring-data-rest-core', version: '3.7.6'
+
+
 
 }
 
