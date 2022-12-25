@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemberService {
@@ -15,10 +16,10 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
-    public List<MemberVo> selectMemberId(String memberId){
+    public Optional<MemberVo> selectMemberId(String memberId){
 
-        List<MemberVo> personList = new ArrayList<>();
-        memberRepository.findById(memberId).forEach(e -> personList.add(e));
-        return personList;
+        Optional<MemberVo> memberInfo = Optional.ofNullable(new MemberVo("non","non"));
+        memberInfo = memberRepository.findById(memberId);
+        return memberInfo;
     }
 }

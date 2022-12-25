@@ -16,4 +16,6 @@ public class MemberVo {
 
     private String nameKo;
 
+
+
 }
