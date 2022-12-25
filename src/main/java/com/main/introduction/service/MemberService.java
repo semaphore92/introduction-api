@@ -1,6 +1,6 @@
 package com.main.introduction.service;
 
-import com.main.introduction.repository.BusinessRepository;
+import com.main.introduction.repository.MemberRepository;
 import com.main.introduction.vo.MemberVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class BusinessService {
+public class MemberService {
 
     @Autowired
-    private BusinessRepository businessRepository;
+    private MemberRepository memberRepository;
 
-    public List<MemberVo> findAll(){
+    public List<MemberVo> selectMemberId(String memberId){
+
         List<MemberVo> personList = new ArrayList<>();
-        businessRepository.findById("hsw").forEach(e -> personList.add(e));
+        memberRepository.findById(memberId).forEach(e -> personList.add(e));
         return personList;
     }
 }
