@@ -13,16 +13,13 @@ import java.util.Set;
 @Entity(name="member_master")
 public class MemberVo {
 
-    @Id
+    @EmbeddedId
     private String memberId;
 
     private String nameKo;
 
-    @OneToOne
-    @JoinTable(
-            name="org_member_rel",
-            joinColumns = @JoinColumn(name="member_id")
-    )
+    @ManyToOne(fetch = FetchType.LAZY) //지연 로딩
+    @JoinColumn(name = "member_id")
     private OrgVo orgVo;
 
 
@@ -32,4 +29,7 @@ public class MemberVo {
         this.nameKo = nameKo;
     }
 
+    public MemberVo() {
+
+    }
 }

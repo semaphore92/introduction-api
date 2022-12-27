@@ -2,10 +2,12 @@ package com.main.introduction.service;
 
 import com.main.introduction.repository.MemberRepository;
 import com.main.introduction.vo.MemberVo;
+import com.main.introduction.vo.OrgVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,5 +30,22 @@ public class MemberService {
         Optional<MemberVo> memberInfo = Optional.ofNullable(new MemberVo("non","non"));
         memberInfo = memberRepository.findById(memberId);
         return memberInfo;
+    }
+
+    public void oneToOne(){
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("tos");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        tx.begin();
+
+        List<MemberVo> memberVoList = em.createQuery("select A from member_master A join A.orgVo",MemberVo.class).getResultList();
+
+        for(MemberVo member : memberVoList){
+
+        }
+
+
     }
 }

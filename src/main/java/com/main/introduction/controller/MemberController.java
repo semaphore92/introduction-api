@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -33,6 +34,15 @@ public class MemberController {
         Optional<MemberVo> memberInfo = memberService.selectMemberId(memberId);
 
         return apiComm.getResponseData(response, HttpStatus.OK.toString(),memberInfo,null);
+    }
+
+
+    @GetMapping("/join")
+    public Map<String, Object> join(HttpServletRequest request, HttpServletResponse response,
+                                    @RequestParam Map<String, Object> params){
+
+        memberService.oneToOne();
+        return apiComm.getResponseData(response, HttpStatus.OK.toString(),new HashMap<>(),null);
     }
 
 }
