@@ -41,7 +41,7 @@ public class MemberController {
     public Map<String, Object> join(HttpServletRequest request, HttpServletResponse response,
                                     @RequestParam Map<String, Object> params){
 
-        memberService.oneToOne();
+        memberService.join();
         return apiComm.getResponseData(response, HttpStatus.OK.toString(),new HashMap<>(),null);
     }
 

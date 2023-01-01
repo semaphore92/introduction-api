@@ -32,20 +32,8 @@ public class MemberService {
         return memberInfo;
     }
 
-    public void oneToOne(){
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("tos");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
-        tx.begin();
-
-        List<MemberVo> memberVoList = em.createQuery("select A from member_master A join A.orgVo",MemberVo.class).getResultList();
-
-        for(MemberVo member : memberVoList){
-
-        }
-
-
+    public void join(){
+        Object result = memberRepository.getJoin("swheo");
+        System.out.println(result.toString());
     }
 }
