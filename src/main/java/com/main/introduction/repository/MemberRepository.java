@@ -14,5 +14,5 @@ public interface MemberRepository extends CrudRepository<MemberVo,String> {
     public Optional<MemberVo> findById(String memberId);
 
     @Query("select a from member_master a join fetch a.orgVo")
-    public Object getJoin(String memberId);
+    public Object getJoin();
 }

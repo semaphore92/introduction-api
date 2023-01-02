@@ -33,7 +33,7 @@ public class MemberService {
     }
 
     public void join(){
-        Object result = memberRepository.getJoin("swheo");
+        Object result = memberRepository.getJoin();
         System.out.println(result.toString());
     }
 }
