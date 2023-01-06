@@ -25,10 +25,10 @@ public class MemberService {
      * @return 회원 ID로 조회한 회원 정보
      * @throws NullPointerException memberId가 null이면, 발생한다.
      */
-    public Optional<MemberVo> selectMemberId(String memberId){
+    public Object selectMemberId(String memberId){
 
-        Optional<MemberVo> memberInfo = Optional.ofNullable(new MemberVo("non","non"));
-        memberInfo = memberRepository.findById(memberId);
+        Object memberInfo = Optional.ofNullable(new MemberVo("non","non"));
+        memberInfo = memberRepository.selectSingleInfo(memberId);
         return memberInfo;
     }
 

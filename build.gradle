@@ -32,9 +32,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest:2.7.5'
 	implementation group: 'org.springframework.data', name: 'spring-data-rest-core', version: '3.7.6'
-
-
-
 }
 
 tasks.named('test') {

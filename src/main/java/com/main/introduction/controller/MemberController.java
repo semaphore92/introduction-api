@@ -31,7 +31,7 @@ public class MemberController {
                                     @RequestParam Map<String, Object> params){
 
         String memberId = params.get("member_id").toString();
-        Optional<MemberVo> memberInfo = memberService.selectMemberId(memberId);
+        Object memberInfo = memberService.selectMemberId(memberId);
 
         return apiComm.getResponseData(response, HttpStatus.OK.toString(),memberInfo,null);
     }
