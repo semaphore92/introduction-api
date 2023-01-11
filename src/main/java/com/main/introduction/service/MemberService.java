@@ -1,10 +1,13 @@
 package com.main.introduction.service;
 
 import com.main.introduction.repository.MemberRepository;
+import com.main.introduction.spec.MemberSpecs;
 import com.main.introduction.vo.MemberVo;
 import com.main.introduction.vo.OrgVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
@@ -17,6 +20,7 @@ public class MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
+
 
     /**
      *  회원의 ID로 회원의 정보를 반환한다.
@@ -35,5 +39,11 @@ public class MemberService {
     public void join(){
         Object result = memberRepository.getJoin();
         System.out.println(result.toString());
+    }
+
+    public void likeMemberId(String memberId){
+
+        Specification<MemberVo> nameSpec = MemberSpecs.nameLike(memberId);
+
     }
 }
