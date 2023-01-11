@@ -7,12 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Data
-@Entity(name="org_member_rel")
-public class OrgRelVo extends BaseTimeAuditiEntity{
+@Entity(name="org_master")
+public class OrgMasterVo extends BaseTimeAuditiEntity{
 
     @Id
-    @Column(name="org_code")
-    private String orgCode;
+    @Column(name="org_master_code")
+    private String orgMasterCode;
 
     private String orgNameKo;
 }
