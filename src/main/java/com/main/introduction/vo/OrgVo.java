@@ -24,4 +24,9 @@ public class OrgVo {
 
     @OneToMany(mappedBy = "orgVo")
     private List<MemberVo> members = new ArrayList<>();
+
+    @OneToOne
+    @PrimaryKeyJoinColumn(name = "member_id")
+    private MemberVo member;
+    
 }
