@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrgRelRepository extends CrudRepository<MemberVo,String> {
 
-    @Query("select a from org_member_rel a where a.orgCode = :orgCode")
+    @Query("select a from org_member_rel a where a.relOrgCode = :orgCode")
     public Object selectOrgInfo(String orgCode);
 }

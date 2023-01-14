@@ -5,10 +5,7 @@ import com.main.introduction.service.MemberService;
 import com.main.introduction.vo.MemberVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,23 +23,14 @@ public class MemberController {
     @Autowired
     APIComm apiComm;
 
-    @GetMapping("/info")
+    @PostMapping("/save")
     public Map<String, Object> info(HttpServletRequest request, HttpServletResponse response,
-                                    @RequestParam Map<String, Object> params){
+                                    @RequestBody Map<String, Object> params){
 
         String memberId = params.get("member_id").toString();
-        Object memberInfo = memberService.selectMemberId(memberId);
+        String nameKo = params.get("name_ko").toString();
+        MemberVo memberInfo = new MemberVo(memberId,nameKo);
 
-        return apiComm.getResponseData(response, HttpStatus.OK.toString(),memberInfo,null);
+        return apiComm.getResponseData(response, HttpStatus.OK.toString(), memberService.saveMember(memberInfo),null);
     }
-
-
-    @GetMapping("/join")
-    public Map<String, Object> join(HttpServletRequest request, HttpServletResponse response,
-                                    @RequestParam Map<String, Object> params){
-
-        memberService.join();
-        return apiComm.getResponseData(response, HttpStatus.OK.toString(),new HashMap<>(),null);
-    }
-
 }
