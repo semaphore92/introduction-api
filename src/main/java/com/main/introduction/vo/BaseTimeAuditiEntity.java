@@ -18,6 +18,6 @@ public abstract class BaseTimeAuditiEntity {
     @CreatedDate // Entity가 생성되어 저장될 때 시간이 자동 저장
     private LocalDateTime createDate;
 
-    @LastModifiedDate
+    @LastModifiedDate // Entity가 수정되는 시점에 시간이 자동 저장
     private LocalDateTime modifiedDate;
 }

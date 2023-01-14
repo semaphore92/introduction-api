@@ -19,8 +19,7 @@ public class MemberVo extends BaseTimeAuditiEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false) //지연 로딩
     @JoinColumn(name = "member_id",insertable = false,updatable = false)
-    private OrgVo orgVo;
-
+    private OrgMemberRelVo orgMemberRelVo;
 
     @Builder
     public MemberVo(String memberId,String nameKo){

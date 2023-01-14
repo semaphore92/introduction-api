@@ -12,6 +12,7 @@ public class OrgMasterVo extends BaseTimeAuditiEntity{
     @Column(name="org_master_code")
     private String orgMasterCode;
 
+    @Column(name="org_name_ko")
     private String orgNameKo;
 
     // 1-1 단방향 연관 매핑

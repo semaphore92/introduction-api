@@ -14,19 +14,20 @@ import java.util.Set;
 
 @Entity(name="org_member_rel")
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 기본 생성자 생성
-public class OrgVo {
+public class OrgMemberRelVo extends BaseTimeAuditiEntity{
 
     @Id
-    @Column(name="org_member_id")
-    private String orgMemberId;
+    @Column(name="rel_member_id")
+    private String relMemberId;
 
-    private String orgCode;
+    @Column(name="rel_org_code", nullable = false)
+    private String relOrgCode;
 
-    @OneToMany(mappedBy = "orgVo")
+    @OneToMany(mappedBy = "orgMemberRelVo")
     private List<MemberVo> members = new ArrayList<>();
 
     @OneToOne
     @PrimaryKeyJoinColumn(name = "member_id")
     private MemberVo member;
-    
+
 }
