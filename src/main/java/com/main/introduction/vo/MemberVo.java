@@ -28,6 +28,13 @@ public class MemberVo extends BaseTimeAuditiEntity {
         this.nameKo = nameKo;
     }
 
+    @Builder
+    public MemberVo(String memberId,String nameKo, List<OrgMemberRelVo> orgMemberRelList ){
+        this.memberId = memberId;
+        this.nameKo = nameKo;
+        this.orgMemberRelList = orgMemberRelList;
+    }
+
     public MemberVo() {
 
     }

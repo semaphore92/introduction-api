@@ -1,9 +1,11 @@
 package com.main.introduction.service;
 
 import com.main.introduction.repository.MemberRepository;
+import com.main.introduction.repository.OrgMasterRepository;
 import com.main.introduction.repository.OrgMemberRelRepository;
 import com.main.introduction.spec.MemberSpecs;
 import com.main.introduction.vo.MemberVo;
+import com.main.introduction.vo.OrgMasterVo;
 import com.main.introduction.vo.OrgMemberRelVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,20 +14,20 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.lang.reflect.Member;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
-
     @Autowired
     OrgMemberRelRepository orgMemberRelRepository;
+
+    @Autowired
+    OrgMasterRepository orgMasterRepository;
 
 
     /**
@@ -48,22 +50,23 @@ public class MemberService {
      * @param params Insert Member 정보
      * @return  Insert 성공 여부
      */
+    @Transactional
     public Object saveMember(Map<String,Object> params){
 
         String memberId = params.get("member_id").toString();
         String nameKo = params.get("name_ko").toString();
-        MemberVo memberVo = new MemberVo(memberId,nameKo);
-        memberRepository.save(memberVo);
+        String orgMasterCode = params.get("org_master_code").toString();
 
-        OrgMemberRelVo orgMemberRelVo = new OrgMemberRelVo(memberId,"AAAA");
-        orgMemberRelRepository.save(orgMemberRelVo);
+        OrgMasterVo orgMasterVo = orgMasterRepository.selectOrgMasterCode(orgMasterCode);
+        String orgCode = orgMasterVo.getOrgMasterCode();
 
-        return null;
+        OrgMemberRelVo orgResultVo = orgMemberRelRepository.save(new OrgMemberRelVo(memberId,orgCode));
+        MemberVo memberVo = new MemberVo(memberId,nameKo,Arrays.asList(orgResultVo));
+
+        return  memberRepository.save(memberVo);
     }
 
     public void likeMemberId(String memberId){
-
         Specification<MemberVo> nameSpec = MemberSpecs.nameLike(memberId);
-
     }
 }
