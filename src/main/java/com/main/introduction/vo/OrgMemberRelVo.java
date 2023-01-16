@@ -19,12 +19,10 @@ public class OrgMemberRelVo extends BaseTimeAuditiEntity{
 
     @Column(name="rel_org_code", nullable = false)
     private String relOrgCode;
-    
-    /*
-    @OneToOne
+
+    @ManyToOne
     @PrimaryKeyJoinColumn(name = "member_id")
-    private MemberVo member;
-     */
+    private MemberVo memberVo;
 
     @Builder
     public OrgMemberRelVo(String relMemberId,String relOrgCode){

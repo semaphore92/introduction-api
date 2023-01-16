@@ -61,11 +61,6 @@ public class MemberService {
         return null;
     }
 
-    public void join(){
-        Object result = memberRepository.getJoin();
-        System.out.println(result.toString());
-    }
-
     public void likeMemberId(String memberId){
 
         Specification<MemberVo> nameSpec = MemberSpecs.nameLike(memberId);

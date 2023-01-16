@@ -14,8 +14,11 @@ public interface MemberRepository extends CrudRepository<MemberVo,String> {
     @Query("select a from member_master a where a.memberId = :memberId")
     public Object selectSingleInfo(@Param("memberId") String memberId);
 
+    /*
     @Query("select a from member_master a join fetch a.orgMemberRelVo")
     public Object getJoin();
+
+     */
 
     @Query(value="select * from member_master", nativeQuery = true)
     public List<MemberVo> nativeQuerySelect();
