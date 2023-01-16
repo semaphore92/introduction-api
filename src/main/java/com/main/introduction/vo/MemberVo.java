@@ -3,6 +3,8 @@ package com.main.introduction.vo;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 //@AllArgsConstructor // 모든 필드 값을 파라미터로 받은 생성자 생성
@@ -17,9 +19,8 @@ public class MemberVo extends BaseTimeAuditiEntity {
     @Column(name="name_ko", nullable = false)
     private String nameKo;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false) //지연 로딩
-    @JoinColumn(name = "member_id",insertable = false,updatable = false)
-    private OrgMemberRelVo orgMemberRelVo;
+    @OneToMany(mappedBy = "memberVo")
+    private List<OrgMemberRelVo> orgMemberRelList = new ArrayList<>();
 
     @Builder
     public MemberVo(String memberId,String nameKo){

@@ -1,9 +1,6 @@
 package com.main.introduction.vo;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,12 +19,18 @@ public class OrgMemberRelVo extends BaseTimeAuditiEntity{
 
     @Column(name="rel_org_code", nullable = false)
     private String relOrgCode;
-
-    @OneToMany(mappedBy = "orgMemberRelVo")
-    private List<MemberVo> members = new ArrayList<>();
-
+    
+    /*
     @OneToOne
     @PrimaryKeyJoinColumn(name = "member_id")
     private MemberVo member;
+     */
+
+    @Builder
+    public OrgMemberRelVo(String relMemberId,String relOrgCode){
+        this.relMemberId = relMemberId;
+        this.relOrgCode = relOrgCode;
+    }
+
 
 }

@@ -27,10 +27,6 @@ public class MemberController {
     public Map<String, Object> info(HttpServletRequest request, HttpServletResponse response,
                                     @RequestBody Map<String, Object> params){
 
-        String memberId = params.get("member_id").toString();
-        String nameKo = params.get("name_ko").toString();
-        MemberVo memberInfo = new MemberVo(memberId,nameKo);
-
-        return apiComm.getResponseData(response, HttpStatus.OK.toString(), memberService.saveMember(memberInfo),null);
+        return apiComm.getResponseData(response, HttpStatus.OK.toString(), memberService.saveMember(params),null);
     }
 }
