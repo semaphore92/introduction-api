@@ -21,7 +21,7 @@ public class OrgMemberRelVo extends BaseTimeAuditiEntity{
     private String relOrgCode;
 
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "member_id")
+    @PrimaryKeyJoinColumn
     private MemberVo memberVo;
 
     @Builder

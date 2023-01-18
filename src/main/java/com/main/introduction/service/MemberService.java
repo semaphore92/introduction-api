@@ -60,9 +60,11 @@ public class MemberService {
         OrgMasterVo orgMasterVo = orgMasterRepository.selectOrgMasterCode(orgMasterCode);
         String orgCode = orgMasterVo.getOrgMasterCode();
 
-        OrgMemberRelVo orgResultVo = orgMemberRelRepository.save(new OrgMemberRelVo(memberId,orgCode));
-        MemberVo memberVo = new MemberVo(memberId,nameKo,Arrays.asList(orgResultVo));
+        List<OrgMemberRelVo> orgMemberRelVoList = new ArrayList<>();
+        orgMemberRelVoList.add(new OrgMemberRelVo(memberId,orgCode));
 
+        //MemberVo memberVo = new MemberVo(memberId,nameKo,orgMemberRelVoList);
+        MemberVo memberVo = new MemberVo(memberId,nameKo);
         return  memberRepository.save(memberVo);
     }
 
