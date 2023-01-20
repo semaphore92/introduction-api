@@ -50,7 +50,6 @@ public class MemberService {
      * @param params Insert Member 정보
      * @return  Insert 성공 여부
      */
-    @Transactional
     public Object saveMember(Map<String,Object> params){
 
         String memberId = params.get("member_id").toString();
