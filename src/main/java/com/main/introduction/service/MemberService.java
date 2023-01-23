@@ -1,33 +1,30 @@
 package com.main.introduction.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.main.introduction.repository.MemberRepository;
 import com.main.introduction.repository.OrgMasterRepository;
-import com.main.introduction.repository.OrgMemberRelRepository;
 import com.main.introduction.spec.MemberSpecs;
 import com.main.introduction.vo.MemberVo;
 import com.main.introduction.vo.OrgMasterVo;
 import com.main.introduction.vo.OrgMemberRelVo;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.lang.reflect.Member;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
-    @Autowired
-    OrgMemberRelRepository orgMemberRelRepository;
 
     @Autowired
-    OrgMasterRepository orgMasterRepository;
+    private OrgMasterRepository orgMasterRepository;
 
 
     /**
@@ -54,17 +51,35 @@ public class MemberService {
 
         String memberId = params.get("member_id").toString();
         String nameKo = params.get("name_ko").toString();
-        String orgMasterCode = params.get("org_master_code").toString();
 
-        OrgMasterVo orgMasterVo = orgMasterRepository.selectOrgMasterCode(orgMasterCode);
-        String orgCode = orgMasterVo.getOrgMasterCode();
-
-        List<OrgMemberRelVo> orgMemberRelVoList = new ArrayList<>();
-        orgMemberRelVoList.add(new OrgMemberRelVo(memberId,orgCode));
-
-        //MemberVo memberVo = new MemberVo(memberId,nameKo,orgMemberRelVoList);
         MemberVo memberVo = new MemberVo(memberId,nameKo);
         return  memberRepository.save(memberVo);
+    }
+
+    public List<Map<String,Object>> retrieveMemberList(){
+
+        List<MemberVo> memberVoList = memberRepository.selectMemberList();
+
+        // List<Object> -> Map<String,MemberVo>로 변경
+        /*
+        Map<String,MemberVo> data = memberVoList.stream()
+                .filter(member -> member.getMemberId().equals("swheo"))
+                .collect(Collectors.toMap(MemberVo::getMemberId ,memberVo -> memberVo));
+        */
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+
+
+        List<Map<String,Object>> dataList = new ArrayList<>();
+        for(MemberVo memberVo: memberVoList){
+
+            Map<String,Object> dataMap = objectMapper.convertValue(memberVo,Map.class);
+            dataMap.put("test","aa");
+
+            dataList.add(dataMap);
+        }
+
+        return dataList;
     }
 
     public void likeMemberId(String memberId){
