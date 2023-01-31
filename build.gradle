@@ -42,30 +42,36 @@ jacoco {
 	toolVersion = "0.8.7"
 }
 
+// 테스트 결과 리포트를 저장할 경로 변경
+// default는 "$/jacoco"
+// reportDir = file($build/customJacocoReportDir)
+
 tasks.withType(Test){
 	jacoco.includeNoLocationClasses = true
+	jacoco.excludes = ['jdk.internal.*']
+}
+
+test {
+	useJUnitPlatform()
 }
 
 jacocoTestReport {
 	reports {
+		//원하는 리포트를 켜고 끌 수 있음.
 		xml.enabled true
 		csv.enabled false
-		html.enabled false
+		html.enabled true
 	}
 }
 
-sonarqube {
+sonar {
 	properties {
 		property "sonar.host.url", "http://localhost:9000"
 		property "sonar.login", "squ_407769f79d77cc6deb1cb3f88615fb0fb1423b98"
-		property "sonar.sources", "src"
 		property "sonar.language", "java"
 		property "sonar.sourceEncoding", "UTF-8"
-		property "sonar.exclusions", "**/*.java"
+
 	}
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
 
