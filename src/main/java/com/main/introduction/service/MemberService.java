@@ -3,29 +3,19 @@ package com.main.introduction.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.main.introduction.repository.MemberRepository;
-import com.main.introduction.repository.OrgMasterRepository;
 import com.main.introduction.spec.MemberSpecs;
 import com.main.introduction.vo.MemberVo;
-import com.main.introduction.vo.OrgMasterVo;
-import com.main.introduction.vo.OrgMemberRelVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Member;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 public class MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
-
-    @Autowired
-    private OrgMasterRepository orgMasterRepository;
-
 
     /**
      *  회원의 ID로 회원의 정보를 반환한다.

@@ -17,25 +17,18 @@ public class MemberVo extends BaseTimeAuditiEntity {
     @Column(name="member_id", nullable = false)
     private String memberId;
 
-    @Column(name="name_ko", nullable = false)
-    private String nameKo;
+    @Column(name="member_name_ko", nullable = false)
+    private String memberNameKo;
 
     // 단방향 OneToMany 조인
-    @OneToMany(fetch = FetchType.EAGER)
+    /*@OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name="rel_member_id")
     private List<OrgMemberRelVo> orgMemberRelList;
-
+*/
     @Builder
     public MemberVo(String memberId,String nameKo){
         this.memberId = memberId;
-        this.nameKo = nameKo;
-    }
-
-    @Builder
-    public MemberVo(String memberId,String nameKo, List<OrgMemberRelVo> orgMemberRelList ){
-        this.memberId = memberId;
-        this.nameKo = nameKo;
-        this.orgMemberRelList = orgMemberRelList;
+        this.memberNameKo = nameKo;
     }
 
     public MemberVo() {

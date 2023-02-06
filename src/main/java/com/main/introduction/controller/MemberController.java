@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/member")
+@RequestMapping("/temp")
 public class MemberController {
 
     @Autowired
