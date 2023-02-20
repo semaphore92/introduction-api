@@ -1,39 +1,39 @@
 package com.main.introduction.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.*;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.xml.ws.Response;
-import java.util.Collections;
-import java.util.HashMap;
+
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class DiscoveryService {
 
     @Autowired
-    RestTemplate restTemplate;
-    public String getInfo(){
+    LoadBalancerClient loadBalancerClient;
+
+    @Autowired
+    DiscoveryClient discoveryClient;
+
+    public Map<String,Object> getInfo(){
+
+        List<String> serviceList = discoveryClient.getServices();
+
+        // Eureka에 등록된 서비스 이름
+        ServiceInstance instance = loadBalancerClient.choose("memberService");
+
+        // 선택된 인스턴스의 주소를 가져와서 RestTemplate로 호출
+        String baseUrl = "http://" + instance.getHost() + ":" + instance.getPort();
+        Map<String,Object> resultMap = new RestTemplate().getForObject(baseUrl + "/api/member/info", Map.class);
 
 
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-
-        HttpEntity request = new HttpEntity(headers);
-
-
-        Map<String,Object> newMap = new HashMap<>();
-
-        ResponseEntity<Object> restExchange =
-                restTemplate.exchange("http://MEMBERSERVICE/api/member/test", HttpMethod.GET,request,Object.class,newMap);
-
-        return "test";
+        return resultMap;
     }
 
 }

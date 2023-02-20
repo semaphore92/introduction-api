@@ -13,14 +13,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableJpaAuditing // Auditing 기능 사용을 위해서는 Run Application Class에 해당 어노테이션 추가 
 @SpringBootApplication
 public class IntroductionApiApplication {
-
-	@LoadBalanced
-	@Bean
-	public RestTemplate getRestTemplate(){
-		return new RestTemplate();
-	}
 	public static void main(String[] args) {
 		SpringApplication.run(IntroductionApiApplication.class, args);
 	}
-
 }
