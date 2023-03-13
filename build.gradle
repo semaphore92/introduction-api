@@ -42,6 +42,8 @@ dependencies {
 
 	// Sprign Cloud Eureka
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+
+	implementation "org.testcontainers:testcontainers:1.15.3"
 }
 
 dependencyManagement {
