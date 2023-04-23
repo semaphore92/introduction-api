@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.main'
-version = 'SNAPSHOT'
+version = 'app'
 sourceCompatibility = '17'
 
 configurations {
