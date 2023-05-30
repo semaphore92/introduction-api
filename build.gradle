@@ -2,8 +2,6 @@ plugins {
 	id 'org.springframework.boot' version '3.0.4'
 	id 'io.spring.dependency-management' version '1.1.0'
 	id 'java'
-	id "org.sonarqube" version "3.5.0.2730"
-	id 'jacoco'
 }
 
 group = 'com.main'
@@ -42,8 +40,6 @@ dependencies {
 
 	// Sprign Cloud Eureka
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
-
-	implementation "org.testcontainers:testcontainers:1.15.3"
 }
 
 dependencyManagement {
@@ -52,40 +48,8 @@ dependencyManagement {
 	}
 }
 
-jacoco {
-	toolVersion = "0.8.7"
-}
-
-// 테스트 결과 리포트를 저장할 경로 변경
-// default는 "$/jacoco"
-// reportDir = file($build/customJacocoReportDir)
-
-tasks.withType(Test){
-	jacoco.includeNoLocationClasses = true
-	jacoco.excludes = ['jdk.internal.*']
-}
-
 test {
 	useJUnitPlatform()
-}
-
-jacocoTestReport {
-	reports {
-		//원하는 리포트를 켜고 끌 수 있음.
-		xml.enabled true
-		csv.enabled false
-		html.enabled true
-	}
-}
-
-sonar {
-	properties {
-		property "sonar.host.url", "http://localhost:9000"
-		property "sonar.login", "squ_407769f79d77cc6deb1cb3f88615fb0fb1423b98"
-		property "sonar.language", "java"
-		property "sonar.sourceEncoding", "UTF-8"
-
-	}
 }
 
 
